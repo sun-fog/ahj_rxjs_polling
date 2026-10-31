@@ -38,7 +38,10 @@ const messages$ = interval(POLL_INTERVAL_MS).pipe(
     ajax.getJSON(`${apiUrl}?t=${Date.now()}`).pipe(
       map((response) => response.messages ?? []),
       // любая ошибка (сеть, код не 200) = «нет новых сообщений»
-      catchError(() => of([])),
+      catchError((err) => {
+        console.error('polling error:', err);
+        return of([]);
+      }),
     ),
   ),
 );
@@ -48,9 +51,3 @@ messages$.subscribe((messages) => {
   // новые сообщения добавляются строго сверху, старые не удаляются
   tbody.insertAdjacentHTML('afterbegin', rows);
 });
-
-catchError((err) => {
-  console.error('polling error:', err);
-  return of([]);
-}),
-
