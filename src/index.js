@@ -3,8 +3,6 @@ import { ajax } from 'rxjs/ajax';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import './index.css';
 
-const DEPLOYED_API = 'https://creative-travesseiro-f91493.netlify.app/messages/unread';
-
 const apiUrl = '/messages/unread';
 const POLL_INTERVAL_MS = 5000;
 
@@ -45,3 +43,9 @@ messages$.subscribe((messages) => {
   // новые сообщения добавляются строго сверху, старые не удаляются
   tbody.insertAdjacentHTML('afterbegin', rows);
 });
+
+catchError((err) => {
+  console.error('polling error:', err);
+  return of([]);
+}),
+
