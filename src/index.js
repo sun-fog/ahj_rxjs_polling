@@ -3,7 +3,12 @@ import { ajax } from 'rxjs/ajax';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import './index.css';
 
-const apiUrl = '/messages/unread';
+const DEPLOYED_API = 'https://creative-travesseiro-f91493.netlify.app/messages/unread';
+
+const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? '/messages/unread'   // локально — через прокси webpack
+  : DEPLOYED_API;        // на Pages — прямо на Netlify
+
 const POLL_INTERVAL_MS = 5000;
 
 // сокращаем subject до 15 символов, если длиннее
