@@ -3,7 +3,7 @@ import { ajax } from 'rxjs/ajax';
 import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import './index.css';
 
-const DEPLOYED_API = 'https://ВАШ-ПРОЕКТ.vercel.app/messages/unread';
+const DEPLOYED_API = 'https://creative-travesseiro-f91493.netlify.app/messages/unread';
 
 const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const apiUrl = isLocal ? '/messages/unread' : DEPLOYED_API;
