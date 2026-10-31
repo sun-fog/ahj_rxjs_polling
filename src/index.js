@@ -5,8 +5,7 @@ import './index.css';
 
 const DEPLOYED_API = 'https://creative-travesseiro-f91493.netlify.app/messages/unread';
 
-const isLocal = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-const apiUrl = isLocal ? '/messages/unread' : DEPLOYED_API;
+const apiUrl = '/messages/unread';
 const POLL_INTERVAL_MS = 5000;
 
 // сокращаем subject до 15 символов, если длиннее
